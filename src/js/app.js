@@ -1,6 +1,7 @@
 App = {
   web3Provider: null,
   contracts: {},
+  account: '0x0',
 
   init: async function() {
     console.log("Entered init function");
@@ -44,6 +45,11 @@ App = {
       App.contracts.Wholesaler = TruffleContract(Wholesaler);
       App.contracts.Wholesaler.setProvider(App.web3Provider);
     });
+
+    $.getJSON("Register.json", function(Register) {
+      App.contracts.Register = TruffleContract(Register);
+      App.contracts.Register.setProvider(App.web3Provider);
+    });
     
     return App.render(); 
   },
@@ -53,9 +59,27 @@ App = {
     web3.eth.getCoinbase(function(err, account) {
       if (err === null) {
         App.account = account;
+        console.log(account);
       }
     });
     console.log("EnD of render function");
+  },
+
+  register: function(){
+    console.log("Entered register");
+    //console.log(App.contracts.Register);
+    App.contracts.Register.deployed().then(function(instance){
+     console.log(instance);
+     instance.register($("#username").val(),$("#password").val(),$("#email").val(),$("#dropdown").val()).then(function(res){
+        console.log(res);
+        alert("Account: "+ App.account);
+        window.location.href = "index.html";
+     }).catch(function(err){
+      alert(App.account + " is already registered under a different username");
+     });
+    }).catch(function(err){
+        console.log(err);
+    });
   }
 };
 

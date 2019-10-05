@@ -2,8 +2,10 @@ body{
     margin: 0;
     padding: 0;
     background: url('medicine.png');
-    background-size: cover;
-    background-position: center;
+    background-repeat:no-repeat;
+    background-size:100%;
+    background-attachment:fixed; 
+    background-size: 100% 100%;
     font-family: sans-serif;
 }
 
