@@ -1,42 +1,48 @@
 <html>
 <head>
-<title>Medicine Supply Chain</title>
+<title>Manufacturer Supply Chain</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+    </head>
 <body>
-    <div class="loginbox">
-    <img src="images/avatar.png" class="avatar">
-        <h1>Register Here</h1>
+    <div class="ManufactureBox" style ="height:900px">
+    <!-- <img src="images/avatar.png" class="Manufactureavatar"> -->
+        <h1>Warehouse Owner Registration Form</h1>
         <form>
-            <p>Username</p>
-            <input type="text" name="" placeholder="Enter Username">
-            <p>Password</p>
-            <input type="password" name="" placeholder="Enter Password">
+            <p>Batch ID</p>
+            <input type="text" name="" placeholder="" id="batch_id">
+            <p>Warehouse Name</p>
+            <input type="text" name="" placeholder="" id="warehouse_name">
+            <p>Warehouse Location</p>
+            <input type="text" name="" placeholder="" id="warehouse_location">
+            <p>Incoming Date</p>
+            <input type="text" id="incoming_date">
+            <p>Outgoing Date</p>
+            <input type="text" id="outgoing_date">
+            <p>Capacity of the Warehouse</p>
+            <input type="text" name="" placeholder="" id="capacity">
+            <p>Updated Price</p>
+            <input type="text" name="" placeholder="" id="updated_price">
+            <p>Quality</p>
+            <input type="range" name="points" min="0" max="10" id="quality">
             <div>
-            <p>Category</p>
-            <br>
-            <select id="dropdown">
-                    <option value="Manufacturer">Manufacturer</option>
-                    <option value="WareHouseOwner">WareHouseOwner</option>
-                    <option value="Wholesaler">Wholesaler</option>
-                    <option value="Chemist">Chemist</option>
-                    <option value="Customer">Customer</option>
-                  </select>
+            <p>Status</p>
+             <input type="text" name="" placeholder="">
+              <div>
+                    <input type="submit" name="Submit" value="Submit" id="status">
             </div>
-                  <br>
-             <div>
-                    <p>Email Address</p>
-                    <br>
-                     <input id="email" type="email" name="email" placeholder="Enter email">
-             </div>
-          
-            <div>
-                    <input type="submit" name="Register" value="Register">
-            </div>
-            
         </form>
         
     </div>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+      $(function() {
+        $("#datepicker").datepicker();
+      });
+    </script> -->
+    <!--Date picker has to be added-->
 
 </body>
-</head>
 </html>
