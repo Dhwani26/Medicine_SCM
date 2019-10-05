@@ -1,16 +1,18 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>Medicine Supply Chain</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
 <body>
     <div class="loginbox">
     <img src="images/avatar.png" class="avatar">
         <h1>Register Here</h1>
-        <form>
+        <form onsubmit="App.register(); return false;">
             <p>Username</p>
-            <input type="text" name="" placeholder="Enter Username">
+            <input type="text" id="username" placeholder="Enter Username" required>
             <p>Password</p>
-            <input type="password" name="" placeholder="Enter Password">
+            <input type="password" id="password" placeholder="Enter Password" required>
             <div>
             <p>Category</p>
             <br>
@@ -26,7 +28,7 @@
              <div>
                     <p>Email Address</p>
                     <br>
-                     <input id="email" type="email" name="email" placeholder="Enter email">
+                     <input id="email" type="email" name="email" placeholder="Enter email" required>
              </div>
           
             <div>
@@ -36,7 +38,13 @@
         </form>
         
     </div>
-
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
 </body>
-</head>
+
 </html>
