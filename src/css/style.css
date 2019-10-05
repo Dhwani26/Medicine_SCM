@@ -61,8 +61,8 @@ body{
 }
 
 .loginbox{
-    width: 320px;
-    height: 500px;
+    width: 350px;
+    height: 520px;
     background: #000;
     color: #fff;
     top: 50%;
@@ -71,6 +71,7 @@ body{
     transform: translate(-50%,-50%);
     box-sizing: border-box;
     padding: 70px 30px;
+    border-radius: 3%;
 }
 
 .avatar{
