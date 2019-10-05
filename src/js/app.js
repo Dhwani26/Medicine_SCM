@@ -3,51 +3,70 @@ App = {
   contracts: {},
 
   init: async function() {
-    // Load pets.
-    $.getJSON('../pets.json', function(data) {
-      var petsRow = $('#petsRow');
-      var petTemplate = $('#petTemplate');
-
-      for (i = 0; i < data.length; i ++) {
-        petTemplate.find('.panel-title').text(data[i].name);
-        petTemplate.find('img').attr('src', data[i].picture);
-        petTemplate.find('.pet-breed').text(data[i].breed);
-        petTemplate.find('.pet-age').text(data[i].age);
-        petTemplate.find('.pet-location').text(data[i].location);
-        petTemplate.find('.btn-adopt').attr('data-id', data[i].id);
-        console.log(petTemplate + ": template");
-        console.log("html :  " + petTemplate.html());
-        petsRow.append(petTemplate.html());
-      }
-    });
-
+    console.log("Entered init function");
     return await App.initWeb3();
   },
 
   initWeb3: async function() {
-    if(typeof web3 !== undefined){
-      App.web3Provider = web3.currentProvider; 
-    }else{
-      App.web3Provider = new Web3.providers.HttpProvider("http://localhost:7545");
+    console.log("Entered initWeb3 function");
+    if (typeof web3 !== 'undefined') {
+      // If a web3 instance is already provided by Meta Mask.
+      App.web3Provider = web3.currentProvider;
+      web3 = new Web3(web3.currentProvider);
+    } else {
+      // Specify default instance if no web3 instance provided
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
+      web3 = new Web3(App.web3Provider);
     }
-
-    web3 = new Web3(App.web3Provider);
-
     return App.initContract();
   },
 
   initContract: function() {
-    $.getJSON("Adoption.json", function(data){
-      var adoptionArtifact = data ;
-      App.contracts.adoption = TruffleContract(adoptionArtifact);
-      App.contracts.adoption.setProvider(App.web3Provider);
-      return App.markAdopted();
+    console.log("Entered initContract function");
+    $.getJSON("Manufacturer.json", function(Manufacturer) {
+      // Instantiate a new truffle contract from the artifact
+      App.contracts.Manufacturer = TruffleContract(Manufacturer);
+      // Connect provider to interact with contract
+      App.contracts.Manufacturer.setProvider(App.web3Provider);
+    });
+
+    $.getJSON("Pharma.json", function(Pharma) {
+      App.contracts.Pharma = TruffleContract(Pharma);
+      App.contracts.Pharma.setProvider(App.web3Provider);
+    });
+
+    $.getJSON("Warehouse.json", function(Warehouse) {
+      App.contracts.Warehouse = TruffleContract(Warehouse);
+      App.contracts.Warehouse.setProvider(App.web3Provider);
+    });
+
+    $.getJSON("Wholesaler.json", function(Wholesaler) {
+      App.contracts.Wholesaler = TruffleContract(Wholesaler);
+      App.contracts.Wholesaler.setProvider(App.web3Provider);
     });
     
-    return App.bindEvents();
+    return App.render(); 
   },
 
-  bindEvents: function() {
+  render: function(){
+    console.log("Entered render function");
+    web3.eth.getCoinbase(function(err, account) {
+      if (err === null) {
+        App.account = account;
+      }
+    });
+    console.log("EnD of render function");
+  }
+};
+
+$(function() {
+  $(window).load(function() {
+    App.init();
+  });
+});
+
+/*
+bindEvents: function() {
     $(document).on('click', '.btn-adopt', App.handleAdopt);
   },
 
@@ -85,14 +104,6 @@ App = {
     });
   }
 
-};
-
-$(function() {
-  $(window).load(function() {
-    App.init();
-  });
-});
-
-
+*/
 
 
