@@ -80,6 +80,47 @@ App = {
     }).catch(function(err){
         console.log(err);
     });
+  },
+  //remaining
+  addBatch: function(){
+
+    console.log("entered addBatch function");
+    
+    App.contracts.Manufacturer.deployed().then(function(instance){
+      console.log(typeof($("#description").val()))
+      instance.createBatch($("#medicineName").val(),
+        $("#manufactureraddress").val(),
+        //$("#manufacturingDate").val(),
+        10,
+        //$("#ExpirationDate").val(),
+        20,
+        $("#noOfUnit").val(),
+        $("#pricePerUnit").val(),
+        $("#description").val(),
+        $("#supplier").val(),
+        $("#composition").val(),
+        //range,
+        $("#status").val()).then(function(res){
+        alert("Batch created successfully");
+      }).catch(function(err){
+        console.log( "error: "+ err);
+      });
+    }).catch(function(err){
+      console.log("err" + err);
+    });
+  },
+
+  addToWarehouse: function(){
+    console.log("entered addtowarehouse function");
+    App.contracts.Warehouse.deployed().then(function(instance){
+      instance.addToWarehouse($().val(),$().val(),$().val(),$().val(),$().val(),$().val(),$().val()).then(function(res){
+        alert("Added to warehouse successfully");
+      }).catch(function(err){
+        console.log(err);
+      });
+    }).catch(function(err){
+      console.log(err);
+    });
   }
 };
 
