@@ -2,6 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   account: '0x0',
+  pharma: 0,
 
   init: async function() {
     console.log("Entered init function");
@@ -109,7 +110,7 @@ App = {
       console.log("err" + err);
     });
   },
-
+  //remaining just add values
   addToWarehouse: function(){
     console.log("entered addtowarehouse function");
     App.contracts.Warehouse.deployed().then(function(instance){
@@ -119,6 +120,56 @@ App = {
         console.log(err);
       });
     }).catch(function(err){
+      console.log(err);
+    });
+  },
+
+  wholesaler: function(){
+    console.log("entered wholesaler function");
+    App.contracts.Wholesaler.deployed().then(function(instance){
+      instance.add_Wholesaler($().val(),$().val(),$().val(),$().val()).then(function(instance){
+        alert("successful transaction");
+      }).catch(function(err){
+        console.log(err);
+      });
+    }).catch(function(err){
+      console.log(err);
+    });
+  },
+
+  pharma: function(){
+    console.log("Entered pharma function:");
+    if(App.pharma == 0){
+      var ManufacturerInstance;
+      App.contracts.Manufacturer.deployed().then(function(instance){
+        ManufacturerInstance = instance;
+        App.contracts.Pharma.deployed().then(function(instance){
+          console.log("giving instance");
+          instance.giveInstance(ManufacturerInstance.contract.address).then(function(res){
+          }).catch(function(err){
+            console.log(err);
+          });
+        }).catch(function(err){
+          console.log(err);
+        });
+      }).catch(function(err){
+        console.log(err);
+      });
+    }else{
+      App.contracts.Pharma.deployed().then(function(instance){
+        instance.creatLot($().val(),$().val(),$().val()).then(function(res){
+          alert("Created lot successfully");
+        }).catch(function(err){
+          console.log(err);
+        });
+      }).catch(function(err){
+        console.log(err);
+      });
+    }
+  },
+
+  retrieve: function(){
+    App.cotracts.Manufacturer.deployed().then().catch(function(err){
       console.log(err);
     });
   }
