@@ -7,7 +7,7 @@ contract Manufacturer{
     //mapping(uint=>)
     struct Batch{
         uint batchId;
-        string medicineName;
+        //string medicineName;
         string manufactureAddress;
         uint dateOfManufacture;
         uint ExpirationDate;
@@ -16,12 +16,11 @@ contract Manufacturer{
         string description;
         string chemicalSupplierName;
         //string status;
-        //string composition;
+        string composition;
     }
 
     
     function createBatch(
-        string memory _medicineName,
         string memory _manufactureAddress,
         uint _dateOfManufacture,
         uint _ExpirationDate,
@@ -29,12 +28,11 @@ contract Manufacturer{
         uint _pricePerUnit,
         string memory _description,
         string memory _chemicalSupplierName,
-        string memory _composition,
-        string memory _status) public returns (bool){
+        string memory _composition) public returns (bool){
         
         i++;
         batches[i].batchId = i; 
-        batches[i].medicineName = _medicineName; 
+        //batches[i].medicineName = _medicineName; 
         batches[i].manufactureAddress = _manufactureAddress;
         batches[i].dateOfManufacture =  _dateOfManufacture;
         batches[i].ExpirationDate = _ExpirationDate;
@@ -42,8 +40,7 @@ contract Manufacturer{
         batches[i].pricePerUnit = _pricePerUnit;
         batches[i].description = _description;
         batches[i].chemicalSupplierName = _chemicalSupplierName;
-        //batches[i].quality = _quality;
-        //batches[i].status = _status ;
+        batches[i].composition = _composition ;
     }
     
     function getQuantity(uint _batchId) public view returns(uint){
