@@ -130,8 +130,10 @@ App = {
 
   wholesaler: function(){
     console.log("entered wholesaler function");
+    let incomingDate =  (new Date($("#wholesaler_incoming_date").val())).getTime();
+    let outgoingDate = (new Date($("#wholesaler_outgoing_date").val())).getTime();
     App.contracts.Wholesaler.deployed().then(function(instance){
-      instance.add_Wholesaler($("#wholesaler_batch_id").val(),$("#wholesaler_outgoing_date").val(),$("#wholesaler_incoming_date").val(),$("#wholesaler_updated_price").val()).then(function(instance){
+      instance.add_Wholesaler($("#wholesaler_batch_id").val(),incomingDate/1000,outgoingDate/1000,$("#wholesaler_updated_price").val(), $("#wholesaler_status").val()).then(function(instance){
         alert("successful transaction");
       }).catch(function(err){
         console.log(err);
