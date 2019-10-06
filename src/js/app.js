@@ -111,10 +111,14 @@ App = {
     });
   },
   //remaining just add values
-  addToWarehouse: function(){
+  addtoWarehouse: function(){
+    let incomingDate =  (new Date($("#incoming_date").val())).getTime();
+    let outgoingDate = (new Date($("#outgoing_date").val())).getTime();
+    console.log(typeof(incomingDate) + outgoingDate);
     console.log("entered addtowarehouse function");
     App.contracts.Warehouse.deployed().then(function(instance){
-      instance.addToWarehouse($().val(),$().val(),$().val(),$().val(),$().val(),$().val(),$().val()).then(function(res){
+      console.log(instance);
+      instance.addToWarehouse($("#warehouse_batch_id").val(),$("#warehouse_updated_price").val(),$("#warehouse_location").val(),$("#warehouse_name").val(),$("#warehouse_capacity").val(),incomingDate/1000,outgoingDate/1000, { from: App.account }).then(function(res){
         alert("Added to warehouse successfully");
       }).catch(function(err){
         console.log(err);
@@ -126,8 +130,10 @@ App = {
 
   wholesaler: function(){
     console.log("entered wholesaler function");
+    let incomingDate =  (new Date($("#wholesaler_incoming_date").val())).getTime();
+    let outgoingDate = (new Date($("#wholesaler_outgoing_date").val())).getTime();
     App.contracts.Wholesaler.deployed().then(function(instance){
-      instance.add_Wholesaler($().val(),$().val(),$().val(),$().val()).then(function(instance){
+      instance.add_Wholesaler($("#wholesaler_batch_id").val(),incomingDate/1000,outgoingDate/1000,$("#wholesaler_updated_price").val(), $("#wholesaler_status").val()).then(function(instance){
         alert("successful transaction");
       }).catch(function(err){
         console.log(err);
@@ -157,7 +163,7 @@ App = {
       });
     }else{
       App.contracts.Pharma.deployed().then(function(instance){
-        instance.creatLot($().val(),$().val(),$().val()).then(function(res){
+        instance.creatLot($("#chemist_batch_id").val(),$("#chemist_updated_price").val(),$("#chemist_quantity").val()).then(function(res){
           alert("Created lot successfully");
         }).catch(function(err){
           console.log(err);

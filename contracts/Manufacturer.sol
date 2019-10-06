@@ -4,7 +4,7 @@ contract Manufacturer{
     uint i = 0;
     
     mapping(uint=>Batch) public batches;
-    mapping(uint=>)
+    //mapping(uint=>)
     struct Batch{
         uint batchId;
         string medicineName;
@@ -15,8 +15,8 @@ contract Manufacturer{
         uint pricePerUnit;
         string description;
         string chemicalSupplierName;
-        string status;
-        string composition;
+        //string status;
+        //string composition;
     }
 
     
@@ -43,7 +43,7 @@ contract Manufacturer{
         batches[i].description = _description;
         batches[i].chemicalSupplierName = _chemicalSupplierName;
         //batches[i].quality = _quality;
-        batches[i].status = _status ;
+        //batches[i].status = _status ;
     }
     
     function getQuantity(uint _batchId) public view returns(uint){
