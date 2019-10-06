@@ -29,12 +29,13 @@ body{
     height: 1050px;
     background: #000;
     color: #fff;
-    top: 75%;
+    top: 90%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
     padding: 30px 30px;
+    opacity:0.8;
     
     
 }
@@ -51,8 +52,9 @@ body{
 }
 
 .ManufactureBox input{
-    width: 85%;
+    width: 100%;
     margin-bottom: 20px;
+   
 }
 
 .ManufactureBox p{
@@ -63,7 +65,7 @@ body{
 
 .loginbox{
     width: 350px;
-    height: 520px;
+    height: 550px;
     background: #000;
     color: #fff;
     top: 50%;
@@ -73,6 +75,7 @@ body{
     box-sizing: border-box;
     padding: 70px 30px;
     border-radius: 3%;
+    opacity: 0.8;
 }
 
 .avatar{
