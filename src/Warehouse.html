@@ -9,7 +9,7 @@
     <div class="ManufactureBox" style ="height:900px">
     <!-- <img src="images/avatar.png" class="Manufactureavatar"> -->
         <h1>Warehouse Owner Registration Form</h1>
-        <form>
+        <form onsubmit="App.addToWarehouse(); return false;">
             <p>Batch ID</p>
             <input type="number" name="" placeholder="" id="warehouse_batch_id">
             <p>Warehouse Name</p>
@@ -43,6 +43,12 @@
       });
     </script> -->
     <!--Date picker has to be added-->
-
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
