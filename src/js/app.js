@@ -186,6 +186,17 @@ App = {
       //here
       instance.batches(1).then(function(res){
         console.log("manufacturer : " + res);
+        var manu_address = res[1];
+        var manu_date = res[2];
+        var exp_date = res[3];
+        var nou = res[4];
+        var ppu = res[5];
+        var des = res[6];
+        var supp = res[7];
+        var comp = res[8];
+
+        var x =  "<div> <p>Manufacture address :" + manu_address +"manu_date" + manu_date +"exp date : " +exp_date+" nnu: "+nou+"ppu: "+ppu + "des : "+des+"supp: " +supp +"comp : " + comp +"</p></div>";
+        $("#manufacturer_timeline").append(x);
       }).catch(function(err){
         console.log(err);
       });
