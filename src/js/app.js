@@ -111,10 +111,14 @@ App = {
     });
   },
   //remaining just add values
-  addToWarehouse: function(){
+  addtoWarehouse: function(){
+    let incomingDate =  (new Date($("#incoming_date").val())).getTime();
+    let outgoingDate = (new Date($("#outgoing_date").val())).getTime();
+    console.log(typeof(incomingDate) + outgoingDate);
     console.log("entered addtowarehouse function");
     App.contracts.Warehouse.deployed().then(function(instance){
-      instance.addToWarehouse($("#warehouse_batch_id").val(),$("#warehouse_updated_price").val(),$("#warehouse_location").val(),$("#warehouse_name").val(),$("#warehouse_capacity").val(),$("#incoming_date").val(),$("#outgoing_date").val()).then(function(res){
+      console.log(instance);
+      instance.addToWarehouse($("#warehouse_batch_id").val(),$("#warehouse_updated_price").val(),$("#warehouse_location").val(),$("#warehouse_name").val(),$("#warehouse_capacity").val(),incomingDate/1000,outgoingDate/1000, { from: App.account }).then(function(res){
         alert("Added to warehouse successfully");
       }).catch(function(err){
         console.log(err);
