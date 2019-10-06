@@ -9,7 +9,7 @@
     <div class="ManufactureBox" style ="height:600px">
     <!-- <img src="images/avatar.png" class="Manufactureavatar"> -->
         <h1>Chemist Registration Form</h1>
-        <form>
+        <form onsubmit="App.pharma(); return false;">
             <p>Batch ID</p>
             <input type="number" name="" placeholder="" id="chemist_batch_id">
             <p>Quantity</p>
@@ -27,6 +27,7 @@
         </form>
         
     </div>
+    <button onclick = "App.retrieve(); return false;">retrieve</button>
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script>

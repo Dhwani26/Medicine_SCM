@@ -2,7 +2,7 @@ App = {
   web3Provider: null,
   contracts: {},
   account: '0x0',
-  pharma: 0,
+  pharmaFlag: 0,
 
   init: async function() {
     console.log("Entered init function");
@@ -82,35 +82,39 @@ App = {
         console.log(err);
     });
   },
-  //remaining
+  //working
   addBatch: function(){
 
     console.log("entered addBatch function");
-    
+    let mDate =  (new Date($("#manufacturingDate").val())).getTime();
+    let eDate = (new Date($("#ExpirationDate").val())).getTime();
     App.contracts.Manufacturer.deployed().then(function(instance){
-      console.log(typeof($("#description").val()))
-      instance.createBatch($("#medicineName").val(),
-        $("#manufactureraddress").val(),
-        //$("#manufacturingDate").val(),
-        10,
-        //$("#ExpirationDate").val(),
-        20,
-        $("#noOfUnit").val(),
+      console.log(typeof($("#manufactureraddress").val())+" "+
+        //typeof($("#manufactureraddress").val())+ " " +
+        typeof(eDate/1000)+ " " +
+        typeof(eDate/1000)+ " " +
+        typeof($("#noOfUnits").val())+" "+
+        typeof($("#pricePerUnit").val())+ " " +
+        typeof($("#description").val())+ " " +
+        typeof($("#supplier").val())+ " " +
+        typeof($("#composition").val()));
+      instance.createBatch($("#manufactureraddress").val(),
+        mDate/1000,
+        eDate/1000,
+        $("#noOfUnits").val(),
         $("#pricePerUnit").val(),
         $("#description").val(),
         $("#supplier").val(),
-        $("#composition").val(),
-        //range,
-        $("#status").val()).then(function(res){
+        $("#composition").val()).then(function(res){
         alert("Batch created successfully");
       }).catch(function(err){
-        console.log( "error: "+ err);
+        console.log( "error: "+ JSON.stringify(err));
       });
     }).catch(function(err){
       console.log("err" + err);
     });
   },
-  //remaining just add values
+  
   addtoWarehouse: function(){
     let incomingDate =  (new Date($("#incoming_date").val())).getTime();
     let outgoingDate = (new Date($("#outgoing_date").val())).getTime();
@@ -145,13 +149,14 @@ App = {
 
   pharma: function(){
     console.log("Entered pharma function:");
-    if(App.pharma == 0){
+    if(App.pharmaFlag == 0){
       var ManufacturerInstance;
       App.contracts.Manufacturer.deployed().then(function(instance){
         ManufacturerInstance = instance;
         App.contracts.Pharma.deployed().then(function(instance){
           console.log("giving instance");
           instance.giveInstance(ManufacturerInstance.contract.address).then(function(res){
+            pharmaFlag = 1;
           }).catch(function(err){
             console.log(err);
           });
@@ -161,23 +166,65 @@ App = {
       }).catch(function(err){
         console.log(err);
       });
-    }else{
-      App.contracts.Pharma.deployed().then(function(instance){
-        instance.creatLot($("#chemist_batch_id").val(),$("#chemist_updated_price").val(),$("#chemist_quantity").val()).then(function(res){
+    }
+    App.contracts.Pharma.deployed().then(function(instance){
+      console.log("entered createlot part")
+      instance.creatLot($("#chemist_quantity").val(),$("#chemist_batch_id").val(),$("#chemist_updated_price").val()).then(function(res){
+        if(res == true){
           alert("Created lot successfully");
-        }).catch(function(err){
-          console.log(err);
-        });
+        }
       }).catch(function(err){
         console.log(err);
       });
-    }
-  },
-
-  retrieve: function(){
-    App.cotracts.Manufacturer.deployed().then().catch(function(err){
+    }).catch(function(err){
       console.log(err);
     });
+  },
+  //we need to get the batch id first and then do it
+  retrieve: function(){
+    App.contracts.Manufacturer.deployed().then(function(instance){
+      //here
+      instance.batches(1).then(function(res){
+        console.log("manufacturer : " + res);
+      }).catch(function(err){
+        console.log(err);
+      });
+    }).catch(function(err){
+      console.log("manufacturer : " + err);
+    });
+
+    App.contracts.Warehouse.deployed().then(function(instance){
+      //here
+      instance.warehouses(1).then(function(res){
+        console.log("warehouses : " + res);
+      }).catch(function(err){
+        console.log(err);
+      });
+    }).catch(function(err){
+      console.log("warehouses : " + err);
+    });
+
+    App.contracts.Wholesaler.deployed().then(function(instance){
+      //here
+      instance.wholesalers(1).then(function(res){
+        console.log("wholesalers : " + res);
+      }).catch(function(err){
+        console.log(err);
+      });
+    }).catch(function(err){
+      console.log("wholesalers : " + err);
+    });
+
+    // App.contracts.Pharma.deployed().then(function(instance){
+    //   //here
+    //   instance.Lots(1).then(function(res){
+    //     console.log("pharma : " + res);
+    //   }).catch(function(err){
+    //     console.log(err);
+    //   });
+    // }).catch(function(err){
+    //   console.log("pharma : " + err);
+    // });
   }
 };
 
